@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
+    tools:context=".LoginActivity"
+    android:onClick="hideKeyboard">
+
 
     <ImageView
         android:id="@+id/waIcon"
@@ -53,7 +55,8 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="Please Enter Your Password"
-        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btnLogin"
