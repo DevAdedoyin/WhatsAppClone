@@ -9,9 +9,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -22,7 +23,7 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class IndexActivity extends AppCompatActivity {
+public class WhatsAppUsersActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView usersListView;
     private ArrayList<String> usersList;
@@ -32,7 +33,7 @@ public class IndexActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_index);
+        setContentView(R.layout.activity_whats_app_users);
 
         usersListView = findViewById(R.id.listViewId);
         usersList = new ArrayList<>();
@@ -40,6 +41,8 @@ public class IndexActivity extends AppCompatActivity {
 
         // Getting SwipeContainerLayout
         swipeLayout = findViewById(R.id.swipeRefresher);
+
+        usersListView.setOnItemClickListener(this);
 
         swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -89,7 +92,7 @@ public class IndexActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.logout){
-            FancyToast.makeText(IndexActivity.this, ParseUser.getCurrentUser().getUsername() + " logged out successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
+            FancyToast.makeText(WhatsAppUsersActivity.this, ParseUser.getCurrentUser().getUsername() + " logged out successfully", FancyToast.LENGTH_LONG, FancyToast.SUCCESS, true).show();
                 ParseUser.logOut();
                 finish();
                 switchToLogin();
@@ -98,7 +101,14 @@ public class IndexActivity extends AppCompatActivity {
     }
 
     private void switchToLogin(){
-        Intent intent = new Intent(IndexActivity.this, LoginActivity.class);
+        Intent intent = new Intent(WhatsAppUsersActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(WhatsAppUsersActivity.this, WhatsAppChatActivity.class);
+        intent.putExtra("selectedUser", usersList.get(position));
         startActivity(intent);
     }
 }

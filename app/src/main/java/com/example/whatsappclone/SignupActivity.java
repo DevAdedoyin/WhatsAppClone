@@ -67,7 +67,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void switchToIndex(){
-        Intent intent = new Intent(SignupActivity.this, IndexActivity.class);
+        Intent intent = new Intent(SignupActivity.this, WhatsAppUsersActivity.class);
         startActivity(intent);
     }
 

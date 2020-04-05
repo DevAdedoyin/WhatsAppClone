@@ -10,15 +10,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.jpardogo.android.googleprogressbar.library.FoldingCirclesDrawable;
-import com.jpardogo.android.googleprogressbar.library.GoogleProgressBar;
 import com.parse.LogInCallback;
-import com.parse.Parse;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -73,7 +67,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void switchToIndex(){
-        Intent intent = new Intent(LoginActivity.this, IndexActivity.class);
+        Intent intent = new Intent(LoginActivity.this, WhatsAppUsersActivity.class);
         startActivity(intent);
         finish();
     }
