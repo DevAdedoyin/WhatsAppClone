@@ -61,18 +61,19 @@ public class WhatsAppChatActivity extends AppCompatActivity implements View.OnCl
             myQuery.findInBackground(new FindCallback<ParseObject>() {
                 @Override
                 public void done(List<ParseObject> objects, ParseException e) {
-
-                    for (ParseObject chatObject : objects) {
-                        String waMessage = chatObject.get("waMessage") + "";
-                        if (chatObject.get("waSender").equals(ParseUser.getCurrentUser().toString())) {
-                            waMessage = ParseUser.getCurrentUser().getUsername() + ": " + waMessage;
+                    if (objects.size() > 0 && e == null) {
+                        for (ParseObject chatObject : objects) {
+                            String waMessage = chatObject.get("waMessage") + "";
+                            if (chatObject.get("waSender").equals(ParseUser.getCurrentUser().toString())) {
+                                waMessage = ParseUser.getCurrentUser().getUsername() + ": " + waMessage;
+                            }
+                            if (chatObject.get("waSender").equals(selectedUser)) {
+                                waMessage = selectedUser + ": " + waMessage;
+                            }
+                            chatsList.add(waMessage);
                         }
-                        if (chatObject.get("waSender").equals(selectedUser)) {
-                            waMessage = selectedUser + ": " + waMessage;
-                        }
-                        chatsList.add(waMessage);
+                        adapter.notifyDataSetChanged();
                     }
-                    adapter.notifyDataSetChanged();
                 }
             });
         }catch (Exception e){
